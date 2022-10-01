@@ -1,0 +1,2 @@
+To run this pipe in dataflow use the command:
+python3 -m my_pipe --region us-central1 --output gs://your_bucket/output --runner DataflowRunner --project your_project --temp_location gs://YOUR_BUCKET/temp/
