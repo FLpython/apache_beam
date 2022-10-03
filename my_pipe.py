@@ -48,11 +48,8 @@ def run(argv=None, save_main_session=True):
         timestamped_events = events | "AddTimestamp" >> beam.ParDo(AddTimestampDoFn())
 
         windowed_events = timestamped_events | beam.WindowInto(
-            Sessions(gap_size=30 * 60),
-            trigger=None,
-            accumulation_mode=None,
-            timestamp_combiner=None,
-            allowed_lateness=Duration(seconds=1 * 24 * 60 * 60),  # 1 day
+            Sessions(gap_size=30 * 60)
+            # FixedWindows(size=30*60)
         )
 
         sum_clicks = windowed_events | beam.CombinePerKey(sum)
